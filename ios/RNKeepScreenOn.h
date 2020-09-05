@@ -9,6 +9,4 @@
 
 @interface RNKeepScreenOn : NSObject <RCTBridgeModule>
 
-+ (void)hello;
-
 @end

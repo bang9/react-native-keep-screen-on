@@ -1,18 +1,16 @@
-import * as React from 'react'
-import { Button, NativeModules, Text, View } from 'react-native'
-import styles from './styles'
+import { NativeModules } from 'react-native'
 
-export const addOne = (input: number) => input + 1
+const RNKeepScreenOn = NativeModules['RNKeepScreenOn'];
+if(!RNKeepScreenOn) throw new Error('Not found module');
 
-export const Counter = () => {
-  const [count, setCount] = React.useState(0)
-
-  return (
-    <View style={styles.container}>
-      <Text>You pressed {count} times</Text>
-      <Button onPress={() => setCount(addOne(count))} title='Press Me' />
-    </View>
-  )
+type KeepScreenOnType = {
+    on: () => void;
+    off: () => void;
 }
 
-export default NativeModules.RNKeepScreenOn
+const KeepScreenOn: KeepScreenOnType = {
+    on: RNKeepScreenOn.on,
+    off: RNKeepScreenOn.off
+}
+
+export default KeepScreenOn;

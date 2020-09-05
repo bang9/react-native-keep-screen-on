@@ -1,17 +1,15 @@
 package com.bang9.reactnativekeepscreenon;
 
+import android.app.Activity;
+import android.view.WindowManager;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-
-import java.util.Map;
-import java.util.HashMap;
+import com.facebook.react.bridge.ReactMethod;
 
 public class RNKeepScreenOnModule extends ReactContextBaseJavaModule {
-    private static ReactApplicationContext reactContext;
-
     RNKeepScreenOnModule(ReactApplicationContext context) {
         super(context);
-        reactContext = context;
     }
 
     @Override
@@ -19,10 +17,19 @@ public class RNKeepScreenOnModule extends ReactContextBaseJavaModule {
         return "RNKeepScreenOn";
     }
 
-    @Override
-    public Map<String, Object> getConstants() {
-        final Map<String, Object> constants = new HashMap<>();
-        constants.put("count", 1);
-        return constants;
+    @ReactMethod
+    public void on(){
+        final Activity activity = getCurrentActivity();
+        if(activity != null) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+    }
+
+    @ReactMethod
+    public void off(){
+        final Activity activity = getCurrentActivity();
+        if(activity != null) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 }
