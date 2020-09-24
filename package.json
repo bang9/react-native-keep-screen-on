@@ -1,7 +1,7 @@
 {
   "name": "react-native-keep-screen",
-  "version": "1.0.4",
-  "description": "",
+  "version": "1.0.5",
+  "description": "react-native keep screen awake",
   "homepage": "https://github.com/bang9/react-native-keep-screen-on",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
