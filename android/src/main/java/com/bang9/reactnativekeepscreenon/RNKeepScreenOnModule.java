@@ -21,7 +21,12 @@ public class RNKeepScreenOnModule extends ReactContextBaseJavaModule {
     public void on(){
         final Activity activity = getCurrentActivity();
         if(activity != null) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
         }
     }
 
@@ -29,7 +34,12 @@ public class RNKeepScreenOnModule extends ReactContextBaseJavaModule {
     public void off(){
         final Activity activity = getCurrentActivity();
         if(activity != null) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
         }
     }
 }
